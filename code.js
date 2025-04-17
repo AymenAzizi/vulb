@@ -25,17 +25,34 @@ router.get('/example1/user/:id', (req,res) => {
 
 router.get('/example2/user/:id',  (req,res) => {
     let userId = req.params.id;
-    connection.query("SELECT * FROM users WHERE id=" + userId,(err, result) => {
+router.get('/example2/user/:id',  (req,res) => {
+    let userId = req.params.id;
+    connection.query("SELECT * FROM users WHERE id= ?", [userId],(err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Server error');
+        }
+router.get('/example/user/:id', (req, res) => {
+    let userId = req.params.id;
+    
+    // Use parameterized queries with placeholders
+    connection.query("SELECT * FROM users WHERE id = ?", [userId], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Server error');
+        }
         res.json(result);
     });
-})
+})\n    })\n        if (err) {
+            console.error(err);
+            return res.status(500).send('Server error');
 
-router.get('/example3/user/:id',  (req,res) => {
+router.get('/example/user/:id', (req, res) => {
     let userId = req.params.id;
-    connection.query({
-        sql : "SELECT * FROM users WHERE id=" +userId
-    },(err, result) => {
-        res.json(result);
+    
+    // Use parameterized queries with placeholders
+    connection.query("SELECT * FROM users WHERE id = ?", [userId], (err, result) => {
+        if (err) {
     });
 })
 
